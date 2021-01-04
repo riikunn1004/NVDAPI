@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import requests
 import json
-import sys
 import argparse
 
 
@@ -14,7 +13,8 @@ def get_description_data_value(json_data):
     Returns:
         string: NVDに記載されている脆弱性の説明(Current Description)
     """
-    return json_data['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value'] 
+    return json_data['result']['CVE_Items'][0]['cve']['description']['description_data'][0]['value']
+
 
 def get_CWE_ID(json_data):
     """CWE-IDを返す
@@ -27,6 +27,7 @@ def get_CWE_ID(json_data):
     """
     return json_data['result']['CVE_Items'][0]['cve']['problemtype']['problemtype_data'][0]['description'][0]['value']
 
+
 def get_cvssv3_score(json_data):
     """CVSS V3 Scoreを返す
 
@@ -38,10 +39,11 @@ def get_cvssv3_score(json_data):
     """
     return json_data['result']['CVE_Items'][0]['impact']['baseMetricV3']
 
+
 def main():
     # コマンドライン引数Parse
-    parser = argparse.ArgumentParser() 
-    parser.add_argument('cve_id',help='CVE-ID')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('cve_id', help='CVE-ID')
     args = parser.parse_args()
 
     # CVE-IDに対応した脆弱性情報をNVDからJSON形式で取得
@@ -60,11 +62,11 @@ def main():
     CWE_ID = get_CWE_ID(json_data)
     print('------- CWE-ID -------')
     print(CWE_ID)
-    
+
     # CVSS V3 Scoreを出力
     cvssv3_score = get_cvssv3_score(json_data)
     print('------- CVSS V3 Score -------')
     print(cvssv3_score)
 
-main()
 
+main()
