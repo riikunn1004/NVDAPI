@@ -8,7 +8,7 @@ import textwrap
 def main():
     #  コマンドライン引数Parse
     parser = argparse.ArgumentParser()
-    parser.add_argument('cpe_name', help='CPE-ID')
+    parser.add_argument('cpe_name', help='CPE Name')
     args = parser.parse_args()
 
     #  CPEに対応した脆弱性情報をNVDからJSON形式で取得
