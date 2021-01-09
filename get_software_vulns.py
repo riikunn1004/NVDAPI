@@ -28,6 +28,10 @@ def main():
         if 'baseMetricV3' in vuln['impact']:
             cvssv3_base_score = vuln['impact']['baseMetricV3']['cvssV3']['baseScore']
             cvssv3_vector_string = vuln['impact']['baseMetricV3']['cvssV3']['vectorString']
+            
+        else:
+            cvssv3_base_score = None
+            cvssv3_vector_string = None
 
         #  CVSS v2のBaseScoreとVectorStringを取得
         cvssv2_base_score = vuln['impact']['baseMetricV2']['cvssV2']['baseScore']
@@ -38,7 +42,7 @@ def main():
         text = textwrap.dedent('''
         CVE-ID:{cve_id}
         CWE-ID:{cwe_id}
-        CVSSv3 BaseScore:{cvssv3_base_score} CVSSv3 VectorString:{cvssv2_vector_string}
+        CVSSv3 BaseScore:{cvssv3_base_score} CVSSv3 VectorString:{cvssv3_vector_string}
         CVSSv2 BaseScore:{cvssv2_base_score} CVSSv2 VectorString: {cvssv2_vector_string}
         Current Description:
         {current_description}
